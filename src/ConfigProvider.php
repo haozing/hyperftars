@@ -36,7 +36,14 @@ class ConfigProvider
                     ],
                 ],
             ],
-
+            'publish' => [
+                [
+                    'id' => 'index',
+                    'description' => 'The tars for index.',
+                    'source' => __DIR__ . '/../publish/index.php',
+                    'destination' => BASE_PATH . '/index.php',
+                ],
+            ],
         ];
     }
 }
