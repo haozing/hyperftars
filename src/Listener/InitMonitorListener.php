@@ -19,7 +19,7 @@ use Tars\Utils;
 use Hyperftars\Tars\InitConfig;
 use Hyperf\Contract\ContainerInterface;
 use Hyperf\Contract\StdoutLoggerInterface;
-class MonitorListener implements ListenerInterface
+class InitMonitorListener implements ListenerInterface
 {
     /**
      * @var StdoutLoggerInterface
