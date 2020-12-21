@@ -18,7 +18,7 @@ class InitConfig
         if (is_file($tars_conf)) {
             $this->conf = Utils::parseFile($tars_conf);
         } else {
-            throw new TarsNotFoundException('get tars_conf file error : ' . $tars_conf);
+            $this->conf = [];
         }
     }
 
