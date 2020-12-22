@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Hyperftars\Tars;
 
 use Hyperftars\Tars\Listener\MonitorListener;
-use \Hyperftars\Tars\Listener\InitMonitorListener;
+use Hyperftars\Tars\Listener\InitMonitorListener;
 use Hyperftars\Tars\Listener\RegularReportListener;
 
 class ConfigProvider
