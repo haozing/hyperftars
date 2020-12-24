@@ -48,8 +48,9 @@ class CoreMiddleware extends \Hyperf\RpcServer\CoreMiddleware
                 return $this->responseBuilder->buildErrorResponse($request, ResponseBuilder::INTERNAL_ERROR);
             }
             try {
-
-                $response = $controllerInstance->{$action}(...$data['args']);
+                $args = $data['args'];
+                $response = $controllerInstance->{$action}(...$args);
+                $data['args'] = $args;
 
             } catch (\Throwable $exception) {
                 $response = $this->responseBuilder->buildErrorResponse($request, ResponseBuilder::SERVER_ERROR, $exception);
@@ -62,7 +63,6 @@ class CoreMiddleware extends \Hyperf\RpcServer\CoreMiddleware
         $responseData["unpackResult"]=$data;
         $responseData["returnVal"]=$response;
 
-        var_dump("responseData");
         return $responseData;
     }
 
