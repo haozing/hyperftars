@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Hyperftars\Tars\Listener;
 
 use Hyperf\Event\Contract\ListenerInterface;
-use Hyperf\Framework\Event\AfterWorkerStart;
+use Hyperf\Framework\Event\OnManagerStart;
 use Hyperftars\Tars\RegularReport;
 use Hyperf\Contract\ContainerInterface;
 
@@ -32,7 +32,7 @@ class RegularReportListener implements ListenerInterface
     public function listen(): array
     {
         return [
-            AfterWorkerStart::class,
+            OnManagerStart::class,
         ];
     }
 
