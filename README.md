@@ -47,6 +47,35 @@ return [
 ```
 其中home-api就是你放置根据协议生成的接口文件地址。
 
+### 生产接口
+自行定义/tars/example.tars文件
+修改/tars/tars.proto.php配置
+```php
+<?php
+/**
+ * Created by PhpStorm.
+ * User: liangchen
+ * Date: 2018/2/24
+ * Time: 下午3:43.
+ */
+
+return array(
+    'appName' => 'swapi',
+    'serverName' => 'example',
+    'objName' => 'obj',
+    'withServant' => true, //决定是服务端,还是客户端的自动生成
+    'tarsFiles' => array(
+        './example.tars',
+    ),
+    'dstPath' => '../src/app/TarsRpc',
+    'namespacePrefix' => 'App\TarsRpc',
+);
+```
+然后执行命令
+```shell script
+cd tars
+php ../src/vendor/phptars/tars2php/src/tars2php.php ./tars.proto.php
+```
 ### 实现接口
 ```php
 <?php
@@ -87,3 +116,6 @@ class PHPServerServantImpl implements AccountServiceServant
 - [ ] 其他RPC协议
 - [ ] 代码自动生成
 - [ ] 监控信息上报
+- [ ] 启动多个Servant
+- [ ] 多个实现类
+- [ ] 未定义路由协议错误提示
