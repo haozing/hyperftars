@@ -68,10 +68,10 @@ class TarsEofPacker implements PackerInterface
                 $iMessageType = 0;
 
                 $statuses = [];
-                var_dump('$statuses');
+
                 $rspBuf = \TUPAPI::encodeRspPacket($iVersion, $cPacketType,
                     $iMessageType, $iRequestId, Code::TARSSERVERSUCCESS, 'success', $encodeBufs, $statuses);
-                var_dump($rspBuf);
+
             } else {
                 $return = $paramInfo['return'];
                 if ($return['type'] !== 'void') {
@@ -119,7 +119,7 @@ class TarsEofPacker implements PackerInterface
         $decodeRet = \TUPAPI::decodeReqPacket($data);
         $decodeRet["args"] = $this->convertToArgs($decodeRet);
 
-        var_dump($decodeRet["args"]);
+
         return $decodeRet;
     }
     public function packBuffer($type, $argv, $tag, $name, $iVersion = 3)
@@ -223,10 +223,9 @@ class TarsEofPacker implements PackerInterface
                         $value = $proto;
                     } // 基本类型
                     else {
-                        var_dump("$unpackMethod");
-                        var_dump($inParam['tag']);
+
                         $value = $unpackMethod($inParam['tag'], $sBuffer, false,$iVersion);
-                        var_dump($value);
+
                     }
                 }
 
@@ -258,7 +257,7 @@ class TarsEofPacker implements PackerInterface
 
             return $args;
         } catch (\Exception $e) {
-            var_dump("1454655555");
+
             throw new \Exception(Code::TARSSERVERSUCCESS);
         }
     }

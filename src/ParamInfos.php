@@ -33,7 +33,7 @@ class ParamInfos
     public function register()
     {
         $tarss = $this->config->get('tars');
-        var_dump($tarss);
+
         foreach ($tarss as $tarsname => $tarsinfo){
             switch ($tarsinfo['serverType']) {
                 case 'tcp' :

@@ -47,6 +47,12 @@ class ConfigProvider
                     'source' => __DIR__ . '/../publish/index.php',
                     'destination' => BASE_PATH . '/index.php',
                 ],
+                [
+                    'id' => 'tars',
+                    'description' => 'The tars for tars.',
+                    'source' => __DIR__ . '/../publish/tars.php',
+                    'destination' => BASE_PATH . '/config/autoload/tars.php',
+                ],
             ],
         ];
     }
