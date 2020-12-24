@@ -27,7 +27,8 @@
         "phptars/tars-report": "0.1.3",
         "phptars/tars-client": "0.3.0",
         "phptars/tars2php": "0.3.2",
-        "hyperf/event": "~2.0.0"
+        "hyperf/event": "~2.0.0",
+        "hyperf/rpc-server": "~2.0.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.14",
