@@ -13,6 +13,8 @@ namespace Hyperftars\Tars;
 
 use Hyperftars\Tars\Listener\MonitorListener;
 use Hyperftars\Tars\Listener\InitMonitorListener;
+use Hyperftars\Tars\Listener\RegisterProtocolListener;
+use Hyperftars\Tars\Listener\RegisterParseListener;
 use Hyperftars\Tars\Listener\RegularReportListener;
 
 class ConfigProvider
@@ -28,6 +30,8 @@ class ConfigProvider
                 MonitorListener::class,
                 InitMonitorListener::class,
                 RegularReportListener::class,
+                RegisterProtocolListener::class,
+                RegisterParseListener::class,
             ],
             'annotations' => [
                 'scan' => [
