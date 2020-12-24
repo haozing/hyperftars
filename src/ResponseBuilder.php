@@ -50,13 +50,14 @@ class ResponseBuilder
 
     public function buildErrorResponse(ServerRequestInterface $request, int $code, \Throwable $error = null): ResponseInterface
     {
+
         $body = new SwooleStream($this->formatErrorResponse($request, $code, $error));
         return $this->response()->withAddedHeader('content-type', 'application/json')->withBody($body);
     }
 
     public function buildResponse(ServerRequestInterface $request, $response): ResponseInterface
     {
-        var_dump("buildResponse");
+
         $body = new SwooleStream($this->formatResponse($response, $request));
         return $this->response()
             ->withAddedHeader('content-type', 'application/json')

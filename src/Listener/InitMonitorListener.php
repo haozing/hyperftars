@@ -50,10 +50,15 @@ class InitMonitorListener implements ListenerInterface
      */
     public function process(object $event)
     {
+
+
         //初始化配置
         $conf = $this->container->get(InitConfig::class)->getTarsConf();
+        //设置服务器
+        $this->container->get(InitConfig::class)->setTarsServer();
         $this->logger->info("初始化配置");
         $result = Utils::parseNodeInfo($conf['tars']['application']['server']['node']);
+
         $objName = $result['objName'];
         $host = $result['host'];
         $port = $result['port'];

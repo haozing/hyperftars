@@ -64,7 +64,6 @@ class TarsPlatform
         $serverName = $tarsServerConf['server'];
         $adapters = array_column($tarsServerConf['adapters'], 'adapterName');
         $masterPid = $master_pid;
-        $this->logger->info("定时上报：".$application.$serverName);
         // 进行一次上报
         $serverInfo = new ServerInfo();
         $serverInfo->application = $application;

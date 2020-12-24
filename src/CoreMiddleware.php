@@ -38,11 +38,13 @@ class CoreMiddleware extends \Hyperf\RpcServer\CoreMiddleware
         if ($dispatched->handler->callback instanceof Closure) {
             $response = call($dispatched->handler->callback);
         } else {
+
             [$controller, $action] = $this->prepareHandler($dispatched->handler->callback);
 
             $controllerInstance = $this->container->get($controller);
+
             if (! method_exists($controller, $action)) {
-                // Route found, but the handler does not exist.
+
                 return $this->responseBuilder->buildErrorResponse($request, ResponseBuilder::INTERNAL_ERROR);
             }
             try {
@@ -66,6 +68,7 @@ class CoreMiddleware extends \Hyperf\RpcServer\CoreMiddleware
 
     protected function handleNotFound(ServerRequestInterface $request)
     {
+
         return $this->responseBuilder->buildErrorResponse($request, ResponseBuilder::METHOD_NOT_FOUND);
     }
 
@@ -76,7 +79,7 @@ class CoreMiddleware extends \Hyperf\RpcServer\CoreMiddleware
 
     protected function transferToResponse($response, ServerRequestInterface $request): ResponseInterface
     {
-        var_dump("transferToResponse");
+
         return $this->responseBuilder->buildResponse($request, $response);
     }
 
