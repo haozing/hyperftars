@@ -129,3 +129,17 @@ class PHPServerServantImpl implements AccountServiceServant
 - [ ] 多个实现类
 - [ ] 优化错误代码提示
 - [ ] 优化解码参数
+
+## 关于发布
+
+ 官方打包发布组件，暂时会出现打包后漏文件问题。
+ 
+ ### 临时的方法，适合docker
+ ```shell script
+#找的代码目录的上一层。
+cp -r hyperf-skeleton/. account #hyperf-skeleton对应你放置tars代码的文件夹，account对应你tars服务名
+tar -czf all.tar.gz account
+mv all.tar.gz hyperf-skeleton/
+rm -rf account
+#好了去hyperf-skeleton文件夹下找找打包后的文件，上传
+```
