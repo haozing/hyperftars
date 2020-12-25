@@ -122,6 +122,40 @@ class TarsEofPacker implements PackerInterface
 
         return $decodeRet;
     }
+    /**
+     * @param $unpackResult
+     * @param $code
+     * @param $msg
+     *
+     * @return mixed
+     */
+    public function packErrRsp($data)
+    {
+        $unpackResult = $data[0];
+        $code = $data[1];
+        $msg = $data[2];
+        $iVersion = $unpackResult['iVersion'];
+        $cPacketType = 0;
+        $iMessageType = 0;
+        $iRequestId = $unpackResult['iRequestId']; // 使用协程的id
+        $statuses = [];
+        $encodeBufs = [];
+
+        if ($iVersion === 1) {
+            $rspBuf = \TUPAPI::encodeRspPacket($iVersion, $cPacketType,
+                $iMessageType, $iRequestId, $code, empty($msg) ? Code::getMsg($code) : $msg, $encodeBufs, $statuses);
+        } else {
+            $servantName = $unpackResult['sServantName'];
+            $funcName = $unpackResult['sFuncName'];
+            $context = [];
+            $iTimeout = 0;
+            $statuses['STATUS_RESULT_CODE'] = $code;
+            $rspBuf = \TUPAPI::encode($iVersion, $iRequestId, $servantName, $funcName, $cPacketType,
+                $iMessageType, $iTimeout, $context, $statuses, $encodeBufs);
+        }
+
+        return $rspBuf;
+    }
     public function packBuffer($type, $argv, $tag, $name, $iVersion = 3)
     {
         $packMethods = [
