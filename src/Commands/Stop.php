@@ -29,14 +29,6 @@ class Stop extends CommandBase
         $name = $tarsConfig['tars']['application']['server']['app'] .
             '.' . $tarsConfig['tars']['application']['server']['server'];
 
-        //判断进程名称和本地是否一致
-        $app_name = env('APP_NAME');
-        if ($name !== env('APP_NAME')){
-            echo "{$name}--{$app_name} Unable to end the process. Please compare the settings. APP_NAME and TARS service name under env are the same "
-                . PHP_EOL;
-
-            return;
-        }
 
         $ret = $this->getProcess($name);
         if ($ret['exist'] === false) {
