@@ -47,13 +47,6 @@ return [
 ```
 其中home-api就是你放置根据协议生成的接口文件地址。
 
-### 配置.env
-
-```php
-APP_NAME 字段要同tars服务名一致。
-例如：
-swapi·account  //应用·服务名
-```
 ### 生产接口
 
 自行定义/tars/example.tars文件
@@ -135,5 +128,4 @@ class PHPServerServantImpl implements AccountServiceServant
 - [ ] 启动多个Servant
 - [ ] 多个实现类
 - [ ] 优化错误代码提示
-- [ ] 优化重启停止
 - [ ] 优化解码参数
