@@ -32,7 +32,7 @@ class Stop extends CommandBase
         //判断进程名称和本地是否一致
         $app_name = env('APP_NAME');
         if ($name !== env('APP_NAME')){
-            echo "{$name}--{$app_name} 无法结束进程。请对比设置.env下APP_NAME和TARS服务名一致。"
+            echo "{$name}--{$app_name} Unable to end the process. Please compare the settings. APP_NAME and TARS service name under env are the same "
                 . PHP_EOL;
 
             return;

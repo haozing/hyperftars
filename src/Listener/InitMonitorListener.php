@@ -56,15 +56,14 @@ class InitMonitorListener implements ListenerInterface
         $conf = $this->container->get(InitConfig::class)->getTarsConf();
         //设置服务器
         $this->container->get(InitConfig::class)->setTarsServer();
-        $this->logger->info("初始化配置");
+        $this->logger->info("initialize tars configuration");
         $result = Utils::parseNodeInfo($conf['tars']['application']['server']['node']);
-
         $objName = $result['objName'];
         $host = $result['host'];
         $port = $result['port'];
         $serverF = new ServerFWrapper($host, $port, $objName);
         // 初始化服务
         $this->container->get(InitMonitorServer::class)->setServerF($serverF);
-        $this->logger->info("初始化服务");
+        $this->logger->info("initialize the MonitorServer");
     }
 }

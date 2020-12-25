@@ -23,7 +23,7 @@ use Psr\Http\Message\ServerRequestInterface;
 class TcpServer extends Server
 {
     /**
-     * @var \Hyperf\JsonRpc\ResponseBuilder
+     * @var \Hyperftars\Tars\ResponseBuilder
      */
     protected $responseBuilder;
 
@@ -90,7 +90,7 @@ class TcpServer extends Server
 
     protected function buildRequest(int $fd, int $fromId, string $data): ServerRequestInterface
     {
-        return $this->buildJsonRpcRequest($fd, $fromId, $this->packer->unpack($data) ?? ['jsonrpc' => '2.0']);
+        return $this->buildTarsRpcRequest($fd, $fromId, $this->packer->unpack($data) ?? ['jsonrpc' => '2.0']);
     }
 
     protected function buildResponse(int $fd, $server): ResponseInterface
@@ -98,11 +98,11 @@ class TcpServer extends Server
         $response = new Psr7Response();
         return $response->withAttribute('fd', $fd)->withAttribute('server', $server);
     }
-    protected function buildJsonRpcRequest(int $fd, int $fromId, array $data)
+    protected function buildTarsRpcRequest(int $fd, int $fromId, array $data)
     {
 
         if (! isset($data['sServantName']) || ! isset($data['sFuncName'])) {
-            return $this->responseBuilder->buildErrorResponse($request, ResponseBuilder::INVALID_REQUEST);
+            return $this->responseBuilder->buildErrorResponse($data, ResponseBuilder::INVALID_REQUEST);
         }
         $data['method'] = "/".$data['sServantName']."/".$data['sFuncName'];
         if (! isset($data['sBuffer'])) {

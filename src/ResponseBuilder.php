@@ -79,8 +79,8 @@ class ResponseBuilder
     protected function formatErrorResponse(ServerRequestInterface $request, int $code, \Throwable $error = null): string
     {
         [$code, $message] = $this->error($code, $error ? $error->getMessage() : null);
-        $response = $this->dataFormatter->formatErrorResponse([$request->getAttribute('request_id'), $code, $message, $error]);
-        return $this->packer->pack($response);
+        $response = $this->dataFormatter->formatErrorResponse([$request->getParsedBody(), $code, $message, $error]);
+        return $this->packer->packErrRsp($response);
     }
 
     protected function error(int $code, ?string $message = null): array

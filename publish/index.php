@@ -20,7 +20,7 @@ $pos = strpos($config_path, '--config=');
 $config_path = substr($config_path, $pos + 9);
 ! defined('TARS_CONFIG_PATH') && define('TARS_CONFIG_PATH',$config_path);
 if (!$config_path){
-    echo "执行命令没有添加配置文件地址参数";
+    echo "Execute the command without adding the configuration file address parameter";
 }
 if (isset($argv[2])){
     $cmd = strtolower($argv[2]);
