@@ -26,7 +26,7 @@ if (isset($argv[2]) && strtolower($argv[2])==='stop'){
     $class = new Stop($config_path);
     $class->execute();
     return;
-}else{
+}elseif ($config_path){
     $class = new Stop($config_path);
     $class->execute();
 }
