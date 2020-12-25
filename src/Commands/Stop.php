@@ -37,6 +37,7 @@ class Stop extends CommandBase
 
             return;
         }
+
         $ret = $this->getProcess($name);
         if ($ret['exist'] === false) {
             echo "{$name} stop  \033[34;40m [FAIL] \033[0m process not exists"
@@ -46,6 +47,8 @@ class Stop extends CommandBase
         }
 
         $pidList = implode(' ', $ret['pidList']);
+
+        //todo kill -TERM 8771 命令可以杀死所有的进程
         $cmd = "kill -9 {$pidList}";
         exec($cmd, $output, $r);
 
