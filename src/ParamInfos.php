@@ -46,10 +46,8 @@ class ParamInfos
                         $docBlock = $method->getDocComment();
                         // 对于注释也应该有自己的定义和解析的方式
                         $protocol = $this->protocolManager->getProtocol($tarsinfo["protocolName"])["tars-parse"];
-                        var_dump($protocol);
                         $protocol = $this->container->get($protocol);
                         $this->paramInfos[$tarsname][$method->name] = $protocol->parseAnnotation($docBlock);
-                        var_dump($this->paramInfos[$tarsname][$method->name]);
                     }
                     break;
                 case 'websocket' :
