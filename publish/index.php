@@ -22,17 +22,13 @@ $config_path = substr($config_path, $pos + 9);
 if (!$config_path){
     echo "Execute the command without adding the configuration file address parameter";
 }
-if (isset($argv[2])){
-    $cmd = strtolower($argv[2]);
-
-    if ($cmd === 'stop') {
-        $class = new Stop($config_path);
-        $class->execute();
-        return;
-    }elseif ($cmd === 'restart'){
-        $class = new Stop($config_path);
-        $class->execute();
-    }
+if (isset($argv[2]) && strtolower($argv[2])==='stop'){
+    $class = new Stop($config_path);
+    $class->execute();
+    return;
+}else{
+    $class = new Stop($config_path);
+    $class->execute();
 }
 //hyperf 启动命令
 $phpfile = $_SERVER['argv'][0];
