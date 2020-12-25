@@ -22,10 +22,10 @@ class InitConfig
     {
         $this->container = $container;
 
-        if (dirname(BASE_PATH, 2)=="/"){
-            $tars_conf = BASE_PATH . '/conf/' . env('PNAME') . '.config.conf';
-        }else{
-            $tars_conf = dirname(BASE_PATH, 2) . '/conf/' . env('PNAME') . '.config.conf';
+        $tars_conf = TARS_CONFIG_PATH;
+        if (!$tars_conf){
+            //方便测试使用
+            $tars_conf = BASE_PATH . '/conf/' . env('APP_NAME') . '.config.conf';
         }
 
         if (is_file($tars_conf)) {

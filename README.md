@@ -47,9 +47,19 @@ return [
 ```
 其中home-api就是你放置根据协议生成的接口文件地址。
 
+### 配置.env
+
+```php
+APP_NAME 字段要同tars服务名一致。
+例如：
+swapi·account  //应用·服务名
+```
 ### 生产接口
+
 自行定义/tars/example.tars文件
+
 修改/tars/tars.proto.php配置
+
 ```php
 <?php
 /**
@@ -61,7 +71,7 @@ return [
 
 return array(
     'appName' => 'swapi',
-    'serverName' => 'example',
+    'serverName' => 'account',
     'objName' => 'obj',
     'withServant' => true, //决定是服务端,还是客户端的自动生成
     'tarsFiles' => array(
@@ -71,7 +81,14 @@ return array(
     'namespacePrefix' => 'App\TarsRpc',
 );
 ```
+appName 和 serverName 字段要同tars服务名一致。
+
+例如：
+
+swapi·account  //应用·服务名
+
 然后执行命令
+
 ```shell script
 cd tars
 php ../src/vendor/phptars/tars2php/src/tars2php.php ./tars.proto.php
@@ -110,7 +127,6 @@ class PHPServerServantImpl implements AccountServiceServant
 - [x] 拉取配置
 - [x] tcp tars协议
 - [x] 存活上报
-- [ ] 日志
 - [ ] http
 - [ ] 协议的打包解包
 - [ ] 其他RPC协议
