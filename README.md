@@ -1,5 +1,5 @@
 # hyperftars-dev
-注意：开发版bug多，不要用于生产。
+注意：开发版bug多，不要用于生产
 ### 目录结构
 
 ```shell script
