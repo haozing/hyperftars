@@ -151,6 +151,7 @@ class PHPServerServantImpl implements AccountServiceServant
 ```shell script
 #根目录
 cd src
+chmod  777 phpDeploy #Linux 设置权限
 ./phpDeploy #Linux 
 phpDeploy.exe #windows
 ```
