@@ -53,6 +53,24 @@ class ConfigProvider
                     'source' => __DIR__ . '/../publish/tars.php',
                     'destination' => BASE_PATH . '/config/autoload/tars.php',
                 ],
+                [
+                    'id' => 'tarsDeploy',
+                    'description' => 'The tarsDeploy for tars.',
+                    'source' => __DIR__ . '/../publish/phpDeploy',
+                    'destination' => BASE_PATH . '/phpDeploy',
+                ],
+                [
+                    'id' => 'tarsDeploybywindows',
+                    'description' => 'The tarsDeploybywindows for tars.',
+                    'source' => __DIR__ . '/../publish/phpDeploy.exe',
+                    'destination' => BASE_PATH . '/phpDeploy.exe',
+                ],
+                [
+                    'id' => 'tarsDeployConfig',
+                    'description' => 'The tarsDeployConfig for tars.',
+                    'source' => __DIR__ . '/../publish/deployConfig.json',
+                    'destination' => BASE_PATH . '/deployConfig.json',
+                ],
             ],
         ];
     }

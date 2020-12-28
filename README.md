@@ -120,6 +120,7 @@ class PHPServerServantImpl implements AccountServiceServant
 - [x] 拉取配置
 - [x] tcp tars协议
 - [x] 存活上报
+- [x] 打包发布
 - [ ] http
 - [ ] 协议的打包解包
 - [ ] 其他RPC协议
@@ -127,19 +128,29 @@ class PHPServerServantImpl implements AccountServiceServant
 - [ ] 监控信息上报
 - [ ] 启动多个Servant
 - [ ] 多个实现类
-- [ ] 优化错误代码提示
 - [ ] 优化解码参数
 
 ## 关于发布
 
- 官方打包发布组件，暂时会出现打包后漏文件问题。
+ 发布插件直接生成压缩包，然后上传tars服务器，但不会发布。
  
- ### 临时的方法，适合docker
- ```shell script
-#找的代码目录的上一层。
-cp -r hyperf-skeleton/. account #hyperf-skeleton对应你放置tars代码的文件夹，account对应你tars服务名
-tar -czf all.tar.gz account
-mv all.tar.gz hyperf-skeleton/
-rm -rf account
-#好了去hyperf-skeleton文件夹下找找打包后的文件，上传
+ ### 配置deployConfig.json
+ ```php
+{
+  "app": "xxx", #tars应用名
+  "server": "xxx", #tars服务名
+  "token": "xxxxx", #tars token
+  "tars_url": "http://xx.xx.xx.xx:3000", #tars web 地址
+  "ignore": [
+    ".gitignore",".idea/" #想要屏蔽的目录或文件
+  ]
+}
+```
+#### token获取方法：此页面你的tars地址/auth.html#/token 点击添加令牌
+### cmd发布
+```shell script
+#根目录
+cd src
+./phpDeploy #Linux 
+phpDeploy.exe #windows
 ```
