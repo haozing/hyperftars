@@ -29,6 +29,35 @@ class Stop extends CommandBase
         $name = $tarsConfig['tars']['application']['server']['app'] .
             '.' . $tarsConfig['tars']['application']['server']['server'];
 
+        $serverPath = BASE_PATH . '/config/autoload/server.php';
+        if (!file_exists($serverPath) || !is_readable($serverPath)) {
+            echo "No configuration file found：config/autoload/server.php";
+            return;
+        }
+        $config = require $serverPath;
+        $configServer = is_array($config) ? $config : [];
+
+        if (!isset($configServer['settings']['pid_file'])){
+            echo "No configuration file found：config/autoload/server.php,Option pid_file is not set";
+            return;
+        }
+        if(!file_exists($configServer['settings']['pid_file'])){
+            echo "pid_file file does not exist";
+            return;
+        }
+        $masterPid = (int) \file_get_contents($configServer['settings']['pid_file']);
+
+        if (!$masterPid){
+            echo "Files not found：server.php pid_file，Please check！";
+            return;
+        }
+        $CMdret = $this->getProcessName($masterPid);
+        $name =$CMdret['ProcessName'];
+        //todo kill -TERM 8771 命令可以杀死所有的进程
+        $cmd = "kill -TERM {$masterPid}";
+        exec($cmd, $output, $r);
+
+        //查找其他的，再杀一遍。
 
         $ret = $this->getProcess($name);
         if ($ret['exist'] === false) {

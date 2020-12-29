@@ -39,7 +39,12 @@ class ParamInfos
                 case 'tcp' :
                 case 'udp' :
                 case 'grpc':
-                    $interface = new \ReflectionClass($tarsinfo['home-api']);
+                    try {
+                        $interface = new \ReflectionClass($tarsinfo['home-api']);
+                    } catch (\Exception $e) {
+                        echo "Please check the tars.php configuration file fields are correct. err:".$e;
+                        break;
+                    }
                     $methods = $interface->getMethods();
 
                     foreach ($methods as $method) {
