@@ -147,7 +147,7 @@ class PHPServerServantImpl implements AccountServiceServant
 }
 ```
 #### token获取方法：此页面你的tars地址/auth.html#/token 点击添加令牌
-### cmd发布[推荐使用linux]
+### cmd发布[⭐推荐使用linux]
 ```shell script
 #根目录
 cd src
