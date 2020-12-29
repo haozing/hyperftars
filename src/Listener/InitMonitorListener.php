@@ -58,6 +58,9 @@ class InitMonitorListener implements ListenerInterface
         $this->container->get(InitConfig::class)->setTarsServer();
         $this->logger->info("initialize tars configuration");
 
+        if (empty($conf)){
+            return;
+        }
 
         $node = Utils::parseNodeInfo($conf['tars']['application']['server']['node']);
         $objName = $node['objName'];
