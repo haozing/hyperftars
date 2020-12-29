@@ -43,4 +43,25 @@ class CommandBase
             ];
         }
     }
+    /**
+     * @param $pid
+     * @return array
+     */
+    public function getProcessName($pid)
+    {
+        $cmd = "ps aux | grep '" . $pid . "' | grep -v grep | grep -v php | awk '{ print $11}'";
+        exec($cmd, $ret);
+
+        if (empty($ret)) {
+            return [
+                'exist' => false,
+            ];
+        } else {
+            $ProcessName = substr($ret[0], 0, -6);
+            return [
+                'exist' => true,
+                'ProcessName' => $ProcessName,
+            ];
+        }
+    }
 }
