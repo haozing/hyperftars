@@ -66,7 +66,9 @@ class Stop extends CommandBase
             if (isset($configs['app_name'])){
                 $name = $configs['app_name'];
             }else{
-                $name = $tarsname;
+                $dotenv = new \Dotenv\Dotenv(BASE_PATH);
+                $dotenv->load();
+                $name = getenv("APP_NAME");
             }
 
         }
