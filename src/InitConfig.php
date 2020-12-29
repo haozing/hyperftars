@@ -49,10 +49,6 @@ class InitConfig
         if (empty($this->conf)){
             return;
         }
-        //设置服务器名字，用于启停
-        $name = $this->conf['tars']['application']['server']['app'] .
-            '.' . $this->conf['tars']['application']['server']['server'];
-
         //TODO:: 判断协议、服务器配置等
         foreach ($this->conf['tars']['application']["server"]['adapters'] as $obj){
 
