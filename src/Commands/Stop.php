@@ -26,10 +26,11 @@ class Stop extends CommandBase
             exit;
         }
 
-        $name = $tarsConfig['tars']['application']['server']['app'] .
+        $tarsname = $tarsConfig['tars']['application']['server']['app'] .
             '.' . $tarsConfig['tars']['application']['server']['server'];
 
         $serverPath = BASE_PATH . '/config/autoload/server.php';
+        $configPath = BASE_PATH . '/config/config.php';
         if (!file_exists($serverPath) || !is_readable($serverPath)) {
             echo "No configuration file found：config/autoload/server.php";
             return;
@@ -37,25 +38,39 @@ class Stop extends CommandBase
         $config = require $serverPath;
         $configServer = is_array($config) ? $config : [];
 
+        //这个文件很有可能没有
         if (!isset($configServer['settings']['pid_file'])){
             echo "No configuration file found：config/autoload/server.php,Option pid_file is not set";
             return;
         }
-        if(!file_exists($configServer['settings']['pid_file'])){
-            echo "pid_file file does not exist";
-            return;
-        }
-        $masterPid = (int) \file_get_contents($configServer['settings']['pid_file']);
+        if(file_exists($configServer['settings']['pid_file'])){
+            $masterPid = (int) \file_get_contents($configServer['settings']['pid_file']);
 
-        if (!$masterPid){
-            echo "Files not found：server.php pid_file，Please check！";
-            return;
+            if (!$masterPid){
+                echo "Files not found：server.php pid_file，Please check！";
+                return;
+            }
+            $CMdret = $this->getProcessName($masterPid);
+            $name =$CMdret['ProcessName'];
+            //todo kill -TERM 8771 命令可以杀死所有的进程
+            $cmd = "kill -TERM {$masterPid}";
+            exec($cmd, $output, $r);
+        }else{
+            //查找配置文件
+            if (!file_exists($configPath) || !is_readable($configPath)) {
+                echo "No configuration file found：config/config.php";
+                return;
+            }
+            $config = require $configPath;
+            $configs = is_array($config) ? $config : [];
+            if (isset($configs['app_name'])){
+                $name = $configs['app_name'];
+            }else{
+                $name = $tarsname;
+            }
+
         }
-        $CMdret = $this->getProcessName($masterPid);
-        $name =$CMdret['ProcessName'];
-        //todo kill -TERM 8771 命令可以杀死所有的进程
-        $cmd = "kill -TERM {$masterPid}";
-        exec($cmd, $output, $r);
+
 
         //查找其他的，再杀一遍。
 
