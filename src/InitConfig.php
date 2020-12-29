@@ -22,10 +22,11 @@ class InitConfig
     {
         $this->container = $container;
 
-        $tars_conf = TARS_CONFIG_PATH;
-        if (!$tars_conf){
+        if (!TARS_CONFIG_PATH){
             //方便测试使用
             $tars_conf = BASE_PATH . '/conf/' . env('APP_NAME') . '.config.conf';
+        }else{
+            $tars_conf = TARS_CONFIG_PATH;
         }
 
         if (is_file($tars_conf)) {
@@ -45,6 +46,9 @@ class InitConfig
         $config = $this->container->get(ConfigInterface::class);
         $server = $config->get("server.servers");
 
+        if (empty($this->conf)){
+            return;
+        }
         //设置服务器名字，用于启停
         $name = $this->conf['tars']['application']['server']['app'] .
             '.' . $this->conf['tars']['application']['server']['server'];

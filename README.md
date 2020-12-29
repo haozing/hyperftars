@@ -121,7 +121,6 @@ class PHPServerServantImpl implements AccountServiceServant
 - [x] tcp tars协议
 - [x] 存活上报
 - [x] 打包上传
-- [ ] http
 - [ ] 协议的打包解包
 - [ ] 其他RPC协议
 - [ ] 代码自动生成
